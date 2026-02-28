@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>stopwatch</title>
+        <link rel="stylesheet" href="activity37.5.css">
+    </head>
+    <body>
+    <div class="container">
+        <h1>Stopwatch</h1>
+        <div id="display">
+            00:00:00
+        </div>
+        <div class="buttons">
+            <button onclick="startstopwatch()">Start</button>
+            <button onclick="pausestopwatch()">Pause</button>
+            <button onclick="resetstopwatch()">Stop</button>
+        </div>
+    </div>
+    <script>
+    let timer;
+    let seconds = 0, minutes = 0, hours = 0;
+    let isRunning = false
+
+    function startstopwatch() {
+        if (!isRunning) {
+        isRunning = true;
+        timer = setInterval (updateDisplay, 1000);
+        }
+    }
+
+    function pausestopwatch() {
+     isRunning = false
+     clearInterval(timer);
+    }
+
+    function resetstopwatch() {
+        isRunning = false
+        clearInterval(timer);
+        hours = 0
+        minutes = 0
+        seconds = 0
+        document.getElementById("display").innerText="00:00:00";
+    }
+
+    function updateDisplay() {
+        seconds++;
+        if (seconds===60) {
+            seconds = 0;
+            minutes++;
+        }
+
+        if (minutes===60) {
+            minutes = 0;
+            hours++;
+        }
+
+        let formattedTime =
+        String(hours).padStart(2, "0") + ":" +
+        String(minutes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0");
+
+        document.getElementById("display").innerText = formattedTime
+    }
+
+    </script>
+    </body>
+</html>
+
